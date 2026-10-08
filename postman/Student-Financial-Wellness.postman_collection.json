@@ -1,0 +1,123 @@
+{
+  "info": {
+    "_postman_id": "c2c7c9b7-2f4e-4e3e-9f0e-student-finwell",
+    "name": "Student Financial Wellness API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:5000/api"},
+    {"key": "token", "value": ""},
+    {"key": "expenseId", "value": ""},
+    {"key": "incomeId", "value": ""},
+    {"key": "budgetId", "value": ""}
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {"method": "GET", "url": "{{baseUrl}}/health"}
+    },
+    {
+      "name": "Get CAPTCHA",
+      "request": {"method": "GET", "url": "{{baseUrl}}/auth/captcha"}
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"name\":\"Neel Shah\",\"email\":\"neel@example.com\",\"password\":\"password123\",\"studentId\":\"STU001\",\"course\":\"Computer Engineering\",\"captchaId\":\"PASTE_CAPTCHA_ID\",\"captchaAnswer\":\"PASTE_ANSWER\"}"},
+        "url": "{{baseUrl}}/auth/register"
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"email\":\"neel@example.com\",\"password\":\"password123\"}"},
+        "url": "{{baseUrl}}/auth/login"
+      }
+    },
+    {
+      "name": "Current User",
+      "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/auth/me"}
+    },
+    {
+      "name": "List Expenses - Search Sort Pagination",
+      "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/expenses?search=food&category=Food&sort=amount&order=desc&page=1&limit=10"}
+    },
+    {
+      "name": "Create Expense",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"title\":\"Monthly groceries\",\"amount\":2500,\"category\":\"Food\",\"date\":\"2026-10-06\",\"notes\":\"Student groceries\"}"},
+        "url": "{{baseUrl}}/expenses"
+      }
+    },
+    {
+      "name": "Update Expense",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"amount\":2800,\"notes\":\"Updated amount\"}"},
+        "url": "{{baseUrl}}/expenses/{{expenseId}}"
+      }
+    },
+    {
+      "name": "Delete Expense",
+      "request": {"method": "DELETE", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/expenses/{{expenseId}}"}
+    },
+    {
+      "name": "List Income",
+      "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/income?sort=date&order=desc&page=1&limit=20"}
+    },
+    {
+      "name": "Create Income",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"source\":\"Part-time Job\",\"amount\":12000,\"category\":\"Part-time Job\",\"date\":\"2026-10-05\",\"notes\":\"October income\"}"},
+        "url": "{{baseUrl}}/income"
+      }
+    },
+    {
+      "name": "Update Income",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"amount\":12500}"},
+        "url": "{{baseUrl}}/income/{{incomeId}}"
+      }
+    },
+    {
+      "name": "Delete Income",
+      "request": {"method": "DELETE", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/income/{{incomeId}}"}
+    },
+    {
+      "name": "List Budgets",
+      "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/budgets"}
+    },
+    {
+      "name": "Create Budget",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"month\":\"2026-10\",\"limit\":15000,\"savingsTarget\":5000,\"notes\":\"October student budget\"}"},
+        "url": "{{baseUrl}}/budgets"
+      }
+    },
+    {
+      "name": "Delete Budget",
+      "request": {"method": "DELETE", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/budgets/{{budgetId}}"}
+    },
+    {
+      "name": "Wellness Summary",
+      "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/wellness/summary?month=2026-10"}
+    },
+    {
+      "name": "Wellness Recommendations",
+      "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/wellness/recommendations?month=2026-10"}
+    }
+  ]
+}

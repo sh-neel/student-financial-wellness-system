@@ -1,0 +1,24 @@
+STUDENT FINANCIAL WELLNESS PROJECT
+
+1. Open this folder in VS Code.
+2. Open Terminal in VS Code.
+3. Start MongoDB (or configure MongoDB Atlas in backend/.env).
+4. Terminal 1:
+   cd backend
+   cp .env.example .env
+   npm install
+   npm run dev
+
+5. Terminal 2:
+   cd frontend
+   cp .env.example .env
+   npm install
+   npm run dev
+
+6. Open http://localhost:5173
+
+IMPORTANT:
+- The backend needs MongoDB.
+- Change JWT_SECRET in backend/.env before deployment.
+- Never commit backend/.env.
+- For a production CAPTCHA, replace the demo math CAPTCHA with Turnstile/reCAPTCHA/hCaptcha.
